@@ -32,7 +32,7 @@ The functionalities of the web application are restricted to logged in users. Th
 
    1. Generates the **challenge**: a weak 6 characters random string.
    2. Stores the challenge in the PHP `$_SESSION` variable, that is persistent across different HTTP requests.
-   3. Sends the challenge encrypted with the user password (fetched from the database) in the HTTP response.
+   3. Sends the challenge encrypted with the hash of the user password (fetched from the database) in the HTTP response.
 
     If the user is not yet registered (i.e., not found in the database), the server sends an HTTP response the string "**ok**" as body.
 
@@ -40,24 +40,24 @@ The functionalities of the web application are restricted to logged in users. Th
     Depending on the server response, the client (i.e., the JavaScript `submitLogin()` function) will either try to sign up or sign in the user.
 
     - To **register** a new user, it sends the *username* and the *hash of the password* to the `func/registration.php` endpoint, that stores it in the database.
-    - To **log in** an existing user, the client receives the challenge and tries to solve it by using the password entered by the user. Once the solution has been computed, it sends it to the `/func/login.php` endpoint, together with the username. The **vulnerability** lays in this login process. Specifically, the server does not check that the username that it receives is the same as the one for which the challenge was generated, but only checks that a username and a solution are included in the request. If the solution is equal to the one that was stored in the `$_SESSION` variable in *step 1*, then it logs the provided username in.
+    - To **login** an existing user, the client receives the challenge and tries to solve it by using the password entered by the user. Once the solution has been computed, it sends it to the `/func/login.php` endpoint, together with the username. The **vulnerability** lays in this login process. Specifically, the server does not check that the username that it receives is the same as the one for which the challenge was generated, but only checks that a username and a solution are included in the request. If the solution is equal to the one that was stored in the `$_SESSION` variable in *step 1*, then it logs the provided username in.
 
 ## Exploitation
 
-Exploiting the vulnerability is conceptually easy: an attacker registers a user, solves the login challenge using its password, abd sends the solution together with a different username that it wants hijack. The server receives the solution, checks whether it is correct, and logs the received username in.
+Exploiting the vulnerability is conceptually easy: an attacker registers a user, solves the login challenge using its password, and sends the solution together with a different username that it wants hijack. The server receives the solution, checks whether it is correct, and logs the received username in.
 
 ### Exploit
 
 The game server places the flags in the web application by registering a user and storing the flag in a note. The name of the registered users are the flag IDs that could be found by requesting the URL <https://scoreboard.ctf.saarland/attack.json>.
 
-For each target machine, we first download the list of flag IDs. Then, we **register a user** on the target we application by directly sending the username and the hashed password to the registration endpoint.
+For each target machine, we first download the list of flag IDs. Then, we **register a user** on the target application by directly sending the username and the hashed password to the registration endpoint.
 
 ```python
 pass_hash = hashlib.sha256("OurSecretPassword!".encode('utf-8')).hexdigest()
-register_response = browser.post(register_url, data={"username": my_username, "password": pass_hash})
+register_response = session.post(register_url, data={"username": my_username, "password": pass_hash})
 ```
 
-*Note*: to make our registration unrecognizable from those made by the game server, we use a randomly selected flag ID from another target as the username.
+**Note**: *to make our registration unrecognizable from those made by the game server, we use a randomly selected flag ID from another target as the username*.
 
 Then, for each flag ID of the target (i.e., username):
 
@@ -66,7 +66,7 @@ Then, for each flag ID of the target (i.e., username):
 2. We solve the challenge using the password of our registered user to get the **solution**.
 
     ```python
-    challenge_response = browser.post(challenge_url, data={"username": my_username})
+    challenge_response = session.post(challenge_url, data={"username": my_username})
     challenge = challenge_response.text
 
     key = bytes.fromhex(pass_hash)
@@ -82,7 +82,7 @@ Then, for each flag ID of the target (i.e., username):
 3. We send the solution to the target application, setting as username the flag ID that we want to retrieve.
 
     ```python
-    login_response = browser.post(login_url, data={"username": flag_ID, "solution": solution})
+    login_response = session.post(login_url, data={"username": flag_ID, "solution": solution})
     ```
 
 4. We visit the homepage of the application that shows all the notes of the logged user. The flag is in the content of the note. We use BeautifulSoup to parse the page and extract the flag.
@@ -117,7 +117,7 @@ if (
 
 Moreover, we changed the challenge function to use a cryptographically stronger random number generator and a longer string.
 
-Finally, we check that `$_POST['solution']` and `$_POST['username']` are not arrays, because on our traffic analyzed we saw that some attacking teams were stealing our flags by sending an array as username and solution. The patch effectively stopped this attack, but we did not investigate this issue further.
+Finally, we check that `$_POST['solution']` and `$_POST['username']` are not arrays, because on our traffic analyzer we saw that some attacking teams were stealing our flags by sending an array as username and solution. The patch effectively stopped this attack, but we did not investigate this issue further.
 
 ```php
 if(is_array($_POST['username'] || is_array($_POST['solution'])){
