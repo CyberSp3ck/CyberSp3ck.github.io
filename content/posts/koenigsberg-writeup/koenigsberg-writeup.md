@@ -1,7 +1,7 @@
 +++
 author = "Carlo Ramponi"
 title = "[SrdnlenCTF 23] Koenigsberg Writeup"
-date = "2023-11-20"
+date = "2023-10-30"
 description = "Writeup for the Koenigsberg challenge of the srdnlenCTF 23"
 tags = [
     "writeup",
