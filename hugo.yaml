@@ -1,0 +1,93 @@
+baseURL: 'https://CyberSp3ckgithub.io/'
+title: CyberSp3ck
+languageCode: en-us
+paginate: 5
+theme: PaperMod
+
+enableEmoji: true
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+minify:
+  disableXML: true
+  minifyOutput: true
+
+
+params:
+  description: "CyberSp3ck"
+  author: CyberSp3ck
+  published: true
+  images: ["/assets/images/logo.jpg"]
+  DateFormat: "January 2, 2006"
+  defaultTheme: auto # dark, light
+  disableThemeToggle: false
+
+  ShowReadingTime: false
+  ShowShareButtons: false
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowWordCount: false
+  ShowRssButtonInSectionTermList: false
+  UseHugoToc: true
+  disableSpecial1stPost: false
+  disableScrollToTop: false
+  comments: false
+  hidemeta: false
+  hideSummary: false
+  showtoc: false
+  tocopen: false
+
+  assets:
+    # disableHLJS: true # to disable highlight.js
+    # disableFingerprinting: true
+    favicon: "<link / abs url>"
+    favicon16x16: "<link / abs url>"
+    favicon32x32: "<link / abs url>"
+    apple_touch_icon: "<link / abs url>"
+    safari_pinned_tab: "<link / abs url>"
+
+  label:
+    text: "CyberSp3ck"
+
+  # home-info mode
+  homeInfoParams:
+    Image: "assets/images/logo.jpg"
+    Title: "CyberSp3ck"
+    Content: >
+      We are a Capture the Flag team from the University of Trento, Italy.
+
+      We are currently taking part in the [CyberCup.IT
+      2024](https://cybercup.it/).
+
+      Our team is mainly composed of former
+      [CyberChallenge.IT](https://cyberchallenge.it) students, a national
+      program and competition for young talents in the field of cyber security.
+
+  socialIcons:
+    - name: github
+      url: "http://github.com/CyberSp3ck"
+
+  cover:
+    hidden: true # hide everywhere but not in structured data
+    hiddenInList: true # hide on list pages and home
+    hiddenInSingle: true # hide on single page
+
+menu:
+  main:
+    - identifier: posts
+      name: posts/
+      url: /posts/
+      weight: 10
+
+pygmentsUseClasses: true
+markup:
+  highlight:
+    noClasses: false
+    # anchorLineNos: true
+    # codeFences: true
+    # guessSyntax: true
+    # lineNos: true
+    # style: monokai
