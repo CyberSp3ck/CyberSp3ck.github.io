@@ -1,4 +1,4 @@
-baseURL: 'https://CyberSp3ckgithub.io/'
+baseURL: "https://CyberSp3ck.github.io/"
 title: CyberSp3ck
 languageCode: en-us
 paginate: 5
@@ -13,7 +13,6 @@ buildExpired: false
 minify:
   disableXML: true
   minifyOutput: true
-
 
 params:
   description: "CyberSp3ck"
@@ -77,9 +76,9 @@ params:
 
 menu:
   main:
-    - identifier: posts
-      name: posts/
-      url: /posts/
+    - identifier: writeups
+      name: Writeups
+      url: /writeups/
       weight: 10
 
 pygmentsUseClasses: true
