@@ -1,6 +1,6 @@
 +++
 author = "Ivan Valentini & Alessandro Mizzaro"
-title = "[SrdnlenCTF 23] Pugwar"
+title = "[SrdnlenCTF 23] Pugwar Writeup"
 date = "2023-10-30"
 description = "Writeup for the Pugwar challenge of the srdnlenCTF 23"
 tags = [
@@ -27,7 +27,7 @@ The application offers the following functionality:
 - Creating a pug with a name, ability and secret associated with your user (`/choose-fighters`)
 - Edit the ability of a pug that you created (`/fighter-customization`)
 
-In the Hall Of Fame page we see a pug called Mario with its ability. Apparently he knows how to keep secrets. So our objective is to learn what type of secret is the pug Mario knows!
+In the Hall Of Fame page we see a pug called Mario with its ability. Apparently, he knows how to keep secrets. So our objective is to learn what type of secret is the pug Mario knows!
 
 After having created an pug a big blue button shows up in the homepage that redirects to `/choose-fighters?pugName=A_Name_You_Chose`. A page that allows you to change the ability of the pug you have just created.
 
@@ -45,7 +45,7 @@ If you were to go to the page `/choose-fighters?pugName=Luigi` you would be able
 
 But if you went to the page `/choose-fighters?pugName=Luigi&secret=Hell` the website would answer `There are no fighters with that pugName!` so even though the `pugName` is correct, the server answers that it can't find a pug with that name, so the backed is checking every parameter we provide.
 
-Many times Node.js application use NoSQL databases because they are very easy to set up and work with. But these type of databases suffer from the similar vulnerabilities as SQL databases.
+Many times Node.js applications use NoSQL databases because they are very easy to set up and work with. However, these types of databases suffer from similar vulnerabilities as SQL databases.
 
 These types of vulnerabilities are [well documented](https://book.hacktricks.xyz/pentesting-web/nosql-injection) online and to check if also the challenge server is vulnerable is as simple as going to `/choose-fighters?pugName=Luigi&secret[$regex]=^Hell`. This will make the server compare with a regex the `secret` value we provided and the one stored in the database. Because the regex we provided matches if the secret starts with `Hell` and the correct secret is `Hello` the server now no longer returns a message saying that `There are no fighters with that pugName!` but instead it will give us the ability to edit the pug ability!
 
