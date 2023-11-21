@@ -18,10 +18,10 @@ params:
   description: "CyberSp3ck"
   author: CyberSp3ck
   published: true
-  images: ["/assets/images/logo.jpg"]
   DateFormat: "January 2, 2006"
   defaultTheme: auto # dark, light
   disableThemeToggle: false
+  images: ["img/logo.jpg"]
 
   ShowReadingTime: false
   ShowShareButtons: false
@@ -42,26 +42,26 @@ params:
   assets:
     # disableHLJS: true # to disable highlight.js
     # disableFingerprinting: true
-    favicon: "<link / abs url>"
-    favicon16x16: "<link / abs url>"
-    favicon32x32: "<link / abs url>"
-    apple_touch_icon: "<link / abs url>"
-    safari_pinned_tab: "<link / abs url>"
+
+    # Favicon is in /static/favicon.ico
+    favicon: "favicon.ico"
+    favicon16x16: "img/favicon-16x16.png"
+    favicon32x32: "img/favicon-32x32.png"
 
   label:
     text: "CyberSp3ck"
 
   # home-info mode
   homeInfoParams:
-    Image: "assets/images/logo.jpg"
+    Image: "static/img/logo.jpg"
     Title: "CyberSp3ck"
     Content: >
       We are a Capture the Flag team from the University of Trento, Italy.
 
-      We are currently taking part in the [CyberCup.IT
+      - We are currently taking part in the [CyberCup.IT
       2024](https://cybercup.it/).
 
-      Our team is mainly composed of former
+      - Our team is mainly composed of former
       [CyberChallenge.IT](https://cyberchallenge.it) students, a national
       program and competition for young talents in the field of cyber security.
 
@@ -76,6 +76,10 @@ params:
 
 menu:
   main:
+    - identifier: cyberchallenge
+      name: CyberChallenge
+      url: /cyberchallenge/
+      weight: 5
     - identifier: writeups
       name: Writeups
       url: /writeups/

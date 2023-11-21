@@ -115,7 +115,7 @@ if (
 }
 ```
 
-Moreover, we changed the challenge function to use a cryptographically stronger random number generator and a longer string.
+Moreover, we changed the `generateChallenge()` function to have a higher strength (i.e., the length of the challenge) and to not seed PHP's *Mersenne Twister Random Number Generator* (`mt_rand()`) with the current `time()` because, according to the documentation and a [StackOverflow answer](https://stackoverflow.com/a/11358829), this is already done by PHP based on "the current timestamp, the PHP process PID and a value produced by PHP's internal [LCG](https://en.wikipedia.org/wiki/Linear_congruential_generator)", that is safe enough for our purposes.
 
 Finally, we check that `$_POST['solution']` and `$_POST['username']` are not arrays, because on our traffic analyzer we saw that some attacking teams were stealing our flags by sending an array as username and solution. The patch effectively stopped this attack, but we did not investigate this issue further.
 
