@@ -8,12 +8,19 @@ tags = [
 ]
 +++
 
-Every year, we participate in the programme [Cyberchallenge.IT](https://cyberchallenge.it/) program, a training program for students between the age of 16 and 24 to build the next generation of cyber security professionals.
-At the [University of Trento](https://cyberchallenge.it/venues/unitn), we run a training program for a selected number of students with lectures and laboratories in the Malaware Lab.
+Every year, we participate to [Cyberchallenge.IT](https://cyberchallenge.it/), a training program for students between the age of 16 and 24 to build the next generation of cyber security professionals.
+At the [University of Trento](https://cyberchallenge.it/venues/unitn), we run a training program for a selected number of students with lectures and laboratories on different topics, such as:
 
-The [Students registration](https://cyberchallenge.it/students) should open soon, keep an eye on their website!
+- Web Security
+- Cryptography
+- Reverse Engineering
+- Binary Exploitation (pwn)
+- Network Security
+- Some forensics, a *bit* of OSINT
 
-If you are a student at UniTN and want to be notified, join our [Discord Channel](https://discord.gg/BTXZ7EFM5Y).
+The [Students registration](https://cyberchallenge.it/students) is open!
+
+If you are a student at UniTN and want to be notified, join [Discord Channel](https://discord.gg/BTXZ7EFM5Y).
 
 ## Past Years
 

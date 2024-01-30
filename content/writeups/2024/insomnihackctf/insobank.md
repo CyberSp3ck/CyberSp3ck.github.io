@@ -1,6 +1,6 @@
 +++
 author = "Matteo Golinelli"
-title = "[insomni'hack teaser 24] InsoBank"
+title = "[insomni'hack teaser 24] InsoBank Writeup"
 date = "2024-01-27"
 description = "Writeup for the InsoBank challenge of the insomni'hack teaser 24"
 tags = [
